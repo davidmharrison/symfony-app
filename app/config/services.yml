@@ -1,0 +1,19 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+   # pjax: 123
+
+services:
+    app.twig_extension:
+        class: AppBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+    app.pjax.action_listener:
+        class: AppBundle\EventListener\PjaxListener
+        # arguments: ["%pjax%"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="container" id="pjax-container">
+            {% block body %}{% endblock %}
+        </div>
+        
+        <hr>
+        
+        <h4 class="text-center">{{ date('Y-m-d H:i:s') }}</h4>
+
+        {% block javascripts %}{% endblock %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function() { 
+                $(document).pjax('a','#pjax-container');
+            });
+        </script>
+    </body>
+</html>
+
+
+{% javascripts 
+    '@jquery_and_ui' 
+    '@bootstrap_js' %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% stylesheets
+    '@bootstrap_css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
