@@ -49,11 +49,10 @@ class OrderController extends Controller
 
         $order = json_decode($output);
 
-        // print_r($order);
-        // die;
+        $orders = count($order) > 0 ? $order[0] : null;
 
         return $this->render('AppBundle:Order:post.html.twig', array(
-            "order" => $order[0]
+            "order" => $orders
         ));
 	}
 
@@ -97,11 +96,12 @@ class OrderController extends Controller
         // close curl resource to free up system resources 
         curl_close($ch);
 
-        print_r($output);
-        die;
+        // print_r($output);
+        // die;
 
         return $this->render('AppBundle:Order:post.html.twig', array(
                 // ...
-            ));    }
+            ));    
+    	}
 
 }

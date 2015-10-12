@@ -97,7 +97,7 @@ class ArtistController extends Controller
 
         $artist->events = $events;
 
-        // print_r($artist->events);
+        // echo json_encode($artist->events);
         // die;
 
         return $this->render('AppBundle:Artist:show.html.twig', array(

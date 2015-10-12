@@ -31,14 +31,21 @@
 				<div class="card text-center">
 				  <div class="card-header">
 				    {{event.venue_space_name}}
+				    <br>
+				    <br>
+				    {{event.event_name}}
 				  </div>
 				  <div class="card-block">
 				    <!-- <h4 class="card-title">{{event.event_name}}</h4> -->
 				    <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
-				    <a href="/order/{{event.id}}" class="btn btn-success">Buy</a>
+				    {% if event.status_code != 'A' %}
+						<button disabled href="/order/{{event.id}}" class="btn btn-secondary btn-sm">{{event.Status.name}}</button>
+				    {% else %}
+					    <a href="/order/{{event.id}}" class="btn btn-success">{{event.Status.name}}</a>
+					{% endif %}
 				  </div>
 				  <div class="card-footer text-muted">
-				    {{event.datetime|formattime("l dS M")}}
+				    {{event.datetime|formattime("l dS M Y")}}
 				    <br>
 				    {{event.datetime|formattime("H:i")}}
 				  </div>
