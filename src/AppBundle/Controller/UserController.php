@@ -10,7 +10,7 @@ class UserController extends Controller
 
 	public function indexAction()
 	{
-		// $user = file_get_contents("user.xml");
+		// $user = file_get_contents("user.json");
 		// "user" => json_decode($user)
 		
 
@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function showAction()
     {
-        $user = file_get_contents("user.xml");
+        $user = file_get_contents(__DIR__."/../user.json");
 
         return $this->render('AppBundle:User:user.html.twig',array(
             "user" => json_decode($user)
@@ -67,9 +67,9 @@ class UserController extends Controller
         // close curl resource to free up system resources 
         curl_close($ch);
 
-        file_put_contents("user.xml",$output);
+        file_put_contents(__DIR__."/../user.json",$output);
 
-        $user = file_get_contents("user.xml");
+        $user = file_get_contents(__DIR__."/../user.json");
         $user = json_decode($user);
 
         // print_r($this->get("user"));
@@ -81,7 +81,7 @@ class UserController extends Controller
 
     public function logoutAction()
     {
-        file_put_contents("user.xml","");
+        file_put_contents(__DIR__."/../user.json","");
 
         return $this->forward("AppBundle:Default:index");
 

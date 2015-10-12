@@ -8,7 +8,7 @@ class User {
 	public $last_name;
 
 	function __construct() {
-		$user = file_get_contents("user.xml");
+		$user = file_get_contents(__DIR__."/user.json");
 		$user = json_decode($user);
 
 		if(!empty($user)) {

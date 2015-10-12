@@ -14,7 +14,7 @@ class OrderController extends Controller
 
  		$ch = curl_init(); 
 
-		$user = file_get_contents("user.xml");
+		$user = file_get_contents(__DIR__."/../user.json");
 		$user = json_decode($user);
 
         $encoded = "";
@@ -69,7 +69,7 @@ class OrderController extends Controller
         $apitoken = $time."YWFmOGMzNWJlNjk";
         $apitoken = sha1($apitoken);
 
-        $user = file_get_contents("user.xml");
+        $user = file_get_contents(__DIR__."/../user.json");
 		$user = json_decode($user);
 
         $user_token = sha1("123456" . $user->email_address . "YWFmOGMzNWJlNjk");
