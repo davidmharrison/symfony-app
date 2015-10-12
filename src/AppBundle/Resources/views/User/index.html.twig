@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+	<form id="loginform" pjax-container action="/login" method="POST">
+		<div class="form-group">
+			<lable>Email</lable>
+			<input type="text" class="form-control" name="email" placeholder="Email">
+		</div>
+
+		<div class="form-group">
+			<lable>Password</lable>
+			<input type="password" class="form-control" name="password" placeholder="Password">
+		</div>
+
+		<input type="submit" class="btn btn-success" value="Login">
+	</form>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() { 
+			$(document).on('submit', 'loginform[pjax-container]', function(event) {
+			  $.pjax.submit(event, '#pjax-container')
+			});
+		});
+	</script>
+{% endblock %}

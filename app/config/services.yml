@@ -9,6 +9,9 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+    user:
+        class: AppBundle\User
+
     app.pjax.action_listener:
         class: AppBundle\EventListener\PjaxListener
         # arguments: ["%pjax%"]

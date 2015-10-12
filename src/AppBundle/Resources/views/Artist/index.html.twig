@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Artist:index{% endblock %}
+
+{% block body %}
+	<h1>Artists by tag: {{tag}}</h1>
+	{% for artist in artists %}
+		<div class="col-md-3">
+			<div class="card card-inverse">
+				<a href="/artists/{{artist.slug}}">
+				  <img class="card-img" style="max-width:100%;" src="{{artist.image_base_url}}{{artist.image_default}}" alt="Card image"> <!-- Images[0].filename -->
+				  <div class="card-img-overlay">
+				    <h4 class="card-title">{{artist.name}}</h4>
+				    {% if artist.caption %}
+					    <p class="card-text">{{artist.caption}}.</p>
+					{% endif %}
+				    <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+				  </div>
+				</a>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

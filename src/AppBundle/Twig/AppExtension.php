@@ -13,9 +13,21 @@ class AppExtension extends \Twig_Extension
         );
     }
 
+    public function getFilters()
+    {
+    	return array(
+            new \Twig_SimpleFilter('formattime', array($this, 'formattime')),
+        );
+    }
+
     public function date($format)
     {
     	return date($format);
+    }
+
+    public function formattime($date,$format)
+    {
+    	return date($format,strtotime($date));
     }
 
     public function getName()

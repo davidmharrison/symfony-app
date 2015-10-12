@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Order:post{% endblock %}
+
+{% block body %}
+	
+	<h5>Select Your Tickets</h5>
+	<div class="row">
+		<div class="col-md-5">
+			<h4>{{order.zone_display_name}}</h4>
+			<small>£{{order.face_value}} Face Value (Standard)</small>
+		</div>
+		<div class="col-md-5">
+			<h4>£{{order.face_value + order.booking_fee}}</h4>
+			<small>inc. booking fee</small>
+		</div>
+		<div class="col-md-2">
+			<select name="quantity" id="" class="form-control">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+			</select>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-5 col-md-offset-5">
+			<h4>Total so far</h4>
+		</div>
+		<div class="col-md-2">
+			<h4>£{{order.face_value + order.booking_fee}}</h4>
+		</div>
+	</div>
+{% endblock %}

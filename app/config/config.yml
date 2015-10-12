@@ -37,6 +37,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         time: 1234
+        user: '@user'
 
 # Assetic Configuration
 assetic:

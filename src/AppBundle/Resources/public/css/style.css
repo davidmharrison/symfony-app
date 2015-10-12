@@ -8,7 +8,17 @@
 	color: #fff;
 }
 
+.genre a,
+.genre a:hover {
+	text-decoration: none;
+}
+
 .card-img {
 	-webkit-filter: brightness(.3);
 	filter: brightness(.3);
+}
+
+.artist-bio {
+	height: 400px;
+	overflow-y: auto;
 }

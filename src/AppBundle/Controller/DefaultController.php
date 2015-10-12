@@ -12,11 +12,14 @@ class DefaultController extends Controller implements PjaxController
     {
         $params = $request->query->all();
 
-        return $this->forward('AppBundle:Blog:index',$params);
+        $user = file_get_contents("user.xml");
+
+        return $this->forward('AppBundle:Recommended:index',$params);
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+            // 'user' => $user
         ));
     }
 }

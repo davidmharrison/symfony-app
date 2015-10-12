@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:Recommended:index{% endblock %}
+
+{% block body %}
+	<h1></h1>
+	{% for event in events %}
+		<div class="col-md-5">
+			<div class="card card-inverse">
+				<a href="/artists/{{event.slug}}">
+				  <img class="card-img" style="max-width:100%;" src="{{event.image_base_url}}{{event.Images[0].filename}}" alt="Card image"> <!-- Images[0].filename -->
+				  <div class="card-img-overlay">
+				    <h4 class="card-title">{{event.name}}</h4>
+				    {% if event.caption %}
+					    <p class="card-text">{{event.caption}}.</p>
+					{% endif %}
+				    <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+				  </div>
+				</a>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}
