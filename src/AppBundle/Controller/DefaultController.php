@@ -10,6 +10,7 @@ class DefaultController extends Controller implements PjaxController
 {
     public function indexAction(Request $request)
     {
+        return $this->forward('AppBundle:Blog:index');
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', array(
