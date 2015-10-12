@@ -38,6 +38,13 @@ class Post
     /**
      * @var string
      *
+     * @ORM\Column(name="image", type="text")
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
@@ -124,4 +131,29 @@ class Post
     {
         return $this->slug;
     }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Post
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of image.
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
 }

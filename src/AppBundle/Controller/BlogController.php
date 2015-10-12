@@ -30,7 +30,7 @@ class BlogController extends Controller implements PjaxController
     {
     	$repo = $this->getDoctrine()->getRepository('AppBundle:Post');
    
-    	$product = $repo->find(1);
+    	$product = $repo->find($id);
     	// var_dump($product);
     	// die;
 

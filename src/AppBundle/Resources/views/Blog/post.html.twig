@@ -1,6 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+	<div>
+		<img src="{{article.image}}" alt="">
+	</div>
 	<h1>{{article.title}}</h1>
 	<hr>
 	<p>{{article.body}}</p>

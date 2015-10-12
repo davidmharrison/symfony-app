@@ -19,7 +19,7 @@
         </div>
         
         <hr>
-        
+
         <h4 class="text-center">{{ date('Y-m-d H:i:s') }}</h4>
 
         {% block javascripts %}{% endblock %}
@@ -39,6 +39,7 @@
 {% endjavascripts %}
 
 {% stylesheets
-    '@bootstrap_css' %}
+    '@bootstrap_css'
+    '@AppBundle/Resources/public/css/*' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}

@@ -21,6 +21,7 @@ class LoadPostData implements FixtureInterface
             $userAdmin->setTitle($faker->sentence(4));
             $userAdmin->setBody($faker->text);
             $userAdmin->setSlug($faker->slug);
+            $userAdmin->setImage($faker->imageUrl(640,480));
 
             $manager->persist($userAdmin);
         }
