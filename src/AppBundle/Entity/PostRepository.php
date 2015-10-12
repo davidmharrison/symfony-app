@@ -18,4 +18,16 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             )
             ->getResult();
     }
+
+    public function findAllWithTagName($tag)
+	{
+	    $query = $this->getEntityManager()
+	        ->createQuery('SELECT p, t FROM AppBundle:Post p LEFT JOIN p.tags t WHERE t.name = :name'
+	    	)->setParameter('name', $tag);
+	    try {
+	        return $query->getResult();
+	    } catch (\Doctrine\ORM\NoResultException $e) {
+	        return null;
+	    }
+	}
 }

@@ -53,14 +53,14 @@ assetic:
     assets:
         jquery_and_ui:
             inputs:
-                - 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'
-                - 'https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/1.9.6/jquery.pjax.min.js'
+                - '@AppBundle/Resources/public/js/jquery.min.js'
+                - '@AppBundle/Resources/public/js/jquery.pjax.min.js'
         bootstrap_js:
             inputs:
-                - 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js'
+                - '@AppBundle/Resources/public/js/bootstrap.min.js'
         bootstrap_css:
             inputs:
-                - 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'
+                - '@AppBundle/Resources/public/css/bootstrap.min.css'
 
 # Doctrine Configuration
 doctrine:

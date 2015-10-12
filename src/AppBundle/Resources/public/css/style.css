@@ -2,3 +2,13 @@
 	padding: 0 0px 10px 0px;
 	margin: 0;
 }
+
+.tags span a,
+.tags span a:hover {
+	color: #fff;
+}
+
+.card-img {
+	-webkit-filter: brightness(.3);
+	filter: brightness(.3);
+}

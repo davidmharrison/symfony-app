@@ -1,39 +1,43 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}Blog Page{% endblock %}
+{% block title %}Products Page{% endblock %}
 
 {% block body %}
-	<h1>Welcome to the Blog Page</h1>
+	<h1>Welcome to the Products Page</h1>
 
 	<hr>
 
 	<div class="row">
 
-		<div class="col-md-8">
+		<div class="col-md-10">
 			<!-- <h2>Posts</h2> -->
-			{% for article in articles %}
-				<article class="post">
-					<div class="row">
-						<div class="col-md-2">
-							<a href="/blog/{{article.id}}" class="thumbnail"><img src="{{article.image}}" alt=""></a>
-						</div>
-						<div class="col-md-8">
-							<a href="/blog/{{article.id}}" >
-								<h3 class="title">{{article.title}}</h3>
-							</a>
-							<div class="body">{{article.body}}</div>
-						</div>
-					</div>
-				</article>
+			{% if tag %}
+				<h5>Results with tag: <span class="label label-warning">{{tag}}</h5>
 				<hr>
+			{% endif %}
+			{% for article in articles %}
+			<div class="col-md-6">
+				<div class="card card-inverse">
+					<a href="/products/{{article.id}}">
+					  <img class="card-img" style="max-width:100%;" src="{{article.image}}" alt="Card image">
+					  <div class="card-img-overlay">
+					    <h4 class="card-title">{{article.title}}</h4>
+					    <p class="card-text">{{article.body}}.</p>
+					    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					  </div>
+					</a>
+				</div>
+			</div>
 			{% endfor %}
 		</div>
 
 		<div class="col-md-2">
 			<h5>Tags</h5>
-			{% for tag in tags %}
-				<span class="label label-default">{{tag.name}}</span>
-			{% endfor %}
+			<div class="tags">
+				{% for tag in tags %}
+					<span class="label label-default"><a href="?tag={{tag.name}}">{{tag.name}}</a></span>
+				{% endfor %}
+			</div>
 		</div>
 
 	</div>

@@ -10,19 +10,24 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BlogController extends Controller implements PjaxController
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+    	$params = $request->query->all();
 
-    	$tags = array(
-    		array("name"=>"Foo"),
-    		array("name"=>"Bar")
-    	);
+    	$tagsrepo = $this->getDoctrine()->getRepository('AppBundle:Tag');
 
     	$repo = $this->getDoctrine()->getRepository('AppBundle:Post');
 
+    	if(isset($params['tag'])) {
+    		$posts = $repo->findAllWithTagName($params['tag']);
+    	} else {
+    		$posts = $repo->findAllOrderedByTitle();
+    	}
+
         return $this->render('AppBundle:Blog:index.html.twig', array(
-            'articles' => $repo->findAllOrderedByTitle(),
-            'tags' => $tags
+            'articles' => $posts,
+            'tag' => isset($params['tag']) ? $params['tag'] : null,
+            'tags' => $tagsrepo->findAll()
         ));  
     }
 
@@ -31,8 +36,6 @@ class BlogController extends Controller implements PjaxController
     	$repo = $this->getDoctrine()->getRepository('AppBundle:Post');
    
     	$product = $repo->find($id);
-    	// var_dump($product);
-    	// die;
 
     	return $this->render('AppBundle:Blog:post.html.twig', array(
             'article' => $product

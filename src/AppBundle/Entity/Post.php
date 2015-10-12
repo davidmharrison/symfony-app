@@ -3,6 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Post
@@ -12,6 +16,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post
 {
+
+    public function __construct() {
+        $this->tags = new ArrayCollection();
+    }
+
     /**
      * @var integer
      *
@@ -48,6 +57,15 @@ class Post
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ManyToMany(targetEntity="Tag")
+     * @JoinTable(name="posts_tags",
+     *      joinColumns={@JoinColumn(name="post_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="tag_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $tags;
 
 
     /**
@@ -156,4 +174,38 @@ class Post
         return $this->image;
     }
 
+
+    /**
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return Post
+     */
+    public function addTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     */
+    public function removeTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
 }

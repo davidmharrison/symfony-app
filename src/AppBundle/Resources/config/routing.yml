@@ -2,10 +2,10 @@ index:
     path:     /
     defaults: {_controller: AppBundle:Default:index}
 blog:
-    path:     /blog
+    path:     /products
     defaults: { _controller: AppBundle:Blog:index }
 post:
-    path:     /blog/{id}
+    path:     /products/{id}
     defaults: { _controller: AppBundle:Blog:show, id: id }
     requirements: 
         id: \d+
