@@ -4,6 +4,11 @@ index:
 blog:
     path:     /blog
     defaults: { _controller: AppBundle:Blog:index }
+post:
+    path:     /blog/{id}
+    defaults: { _controller: AppBundle:Blog:show, id: id }
+    requirements: 
+        id: \d+
 about:
     path:     /about
     defaults: { _controller: AppBundle:About:index }
