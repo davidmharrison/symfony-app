@@ -5,15 +5,13 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use AppBundle\TicketLine;
+
 class UserController extends Controller
 {
 
 	public function indexAction()
 	{
-		// $user = file_get_contents("user.json");
-		// "user" => json_decode($user)
-		
-
 		return $this->render('AppBundle:User:index.html.twig');
 	}
 
@@ -32,47 +30,17 @@ class UserController extends Controller
     	$email = $request->request->get('email');
     	$password = $request->request->get('password');
 
-    	$loginurl = "http://api.ticketline.co.uk//user";
+    	$ticketline = $this->get('ticketline');
 
-    	$encoded = "";
-    	$time = time();
+        $output = $ticketline->loginUser($email,$password);
 
-    	$ch = curl_init(); 
+        // print_r($output);
+        // die;
 
-    	$apitoken = $time."YWFmOGMzNWJlNjk";
-        $apitoken = sha1($apitoken);
-
-    	$encoded .= urlencode('api-key').'='.urlencode('NGNkZGRhYjkzY2Z').'&';
-        $encoded .= urlencode('method').'='.urlencode('signIn').'&';
-        $encoded .= urlencode('timestamp').'='.urlencode($time).'&';
-       
-        $encoded .= urlencode('email').'='.urlencode($email).'&';
-        $encoded .= urlencode('password').'='.urlencode($password).'&';
-        $encoded .= urlencode('api-token').'='.urlencode($apitoken).'&';
-
-        $encoded .= urlencode('device-uuid').'='.urlencode("123456").'&';
-
-        // set url 
-        curl_setopt($ch, CURLOPT_URL, $loginurl); 
-        curl_setopt($ch, CURLOPT_POST, 1);
-        $encoded = substr($encoded, 0, strlen($encoded)-1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,  $encoded);
-
-        //return the transfer as a string 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-
-        // $output contains the output string 
-        $output = curl_exec($ch); 
-
-        // close curl resource to free up system resources 
-        curl_close($ch);
-
-        file_put_contents(__DIR__."/../user.json",$output);
+        file_put_contents(__DIR__."/../user.json",json_encode($output));
 
         $user = file_get_contents(__DIR__."/../user.json");
         $user = json_decode($user);
-
-        // print_r($this->get("user"));
 
         return $this->render('AppBundle:User:user.html.twig', array(
             "user" => $user        

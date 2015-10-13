@@ -12,7 +12,7 @@ class DefaultController extends Controller implements PjaxController
     {
         $params = $request->query->all();
 
-        $user = file_get_contents("user.xml");
+        $user = file_get_contents(__DIR__."/../user.json");
 
         return $this->forward('AppBundle:Recommended:index',$params);
 

@@ -13,7 +13,7 @@
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() { 
-			$(document).on('submit', 'form[pjax-container]', function(event) {
+			$(document).on('submit', '#form[pjax-container]', function(event) {
 			  $.pjax.submit(event, '#pjax-container')
 			});
 		});
