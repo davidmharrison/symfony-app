@@ -4,7 +4,9 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 
+use AppBundle\Entity\Artist;
 use AppBundle\TicketLine;
 
 class ArtistController extends Controller
@@ -25,17 +27,41 @@ class ArtistController extends Controller
 
     public function showAction($slug)
     {
-       
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Artist');
+
+        $artist = $repository->findOneBySlug($slug);
+
         $ticketline = $this->get('ticketline');
 
-        $artist = $ticketline->getArtistBySlug($slug);
+        $artistdata = $ticketline->getArtistBySlug($slug);
 
-        $events = $ticketline->getEventsByArtist($artist->id);
+        if(!$artist) {
+            $artist = new Artist();
+            $artist->setName($artistdata->name);
+            $artist->setSlug($artistdata->slug);
+        }
 
-        $artist->events = $events;
+        if(!$artist->getImageBaseUrl()) {
+
+            $artist->setImageBaseUrl($artistdata->image_base_url);
+            $artist->setImageDefault($artistdata->image_default);
+            $artist->setItunesArtistId($artistdata->itunes_artist_id);
+            $artist->setDescription($artistdata->Bio->description);
+
+            $manager->persist($artist);
+
+            $manager->flush();
+        }
+
+        $events = $ticketline->getEventsByArtist($artistdata->id);
+
+        $artistdata->events = $events;
 
         return $this->render('AppBundle:Artist:show.html.twig', array(
-            "artist" => $artist
+            "artist" => $artistdata
         ));    
     }
 

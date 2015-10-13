@@ -4,6 +4,9 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
+
+use AppBundle\Entity\Artist;
 
 class AToZController extends Controller
 {
@@ -11,28 +14,63 @@ class AToZController extends Controller
     {
     	$letetrparam = $request->query->get('letter');
     	$letter = !empty($letetrparam) ? $letetrparam : "A";
-    	// echo $letter;
-    	// die;
 
-    	$atozurl = "http://api.ticketline.co.uk//artist?method=getByAtoZ&first-char=".$letter."&api-key=NGNkZGRhYjkzY2Z&on-sale=true";
+        // $pheanstalk = $this->get("leezy.pheanstalk.primary");
 
-    	$ch = curl_init();
+        // $pheanstalk->useTube('testtube')->put($letter);
 
-        // set url 
-        curl_setopt($ch, CURLOPT_URL, $atozurl); 
+        // $pheanstalk->watch('testtube');
 
-        //return the transfer as a string 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+        $manager = $this->getDoctrine()->getManager();
 
-        // $output contains the output string 
-        $output = curl_exec($ch); 
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Artist');
 
-        // close curl resource to free up system resources 
-        curl_close($ch);
+        // while($job = $pheanstalk->reserve()) {
+        //     $letter = $job->getData();
 
-        $recommended = $output;
+        //     $ticketline = $this->get('ticketline');
 
-        $artists = json_decode($recommended);
+        //     $artists = $ticketline->getArtistsByLetter($letter);
+
+        //     // print_r($letter);
+        //     // die;
+
+        //     foreach($artists as $artistdata) {
+
+        //         $artist = $repository->findOneBySlug($artistdata->slug);
+        //         if(!$artist) {
+
+        //             $artist = new Artist();
+        //             $artist->setName($artistdata->name);
+        //             $artist->setSlug($artistdata->slug);
+
+        //             $manager->persist($artist);
+        //         }
+        //     }
+
+        //     $manager->flush();
+        //     $pheanstalk->delete($job);
+        // }
+
+
+     //    $recommended = $output;
+
+     //    $artists = json_decode($recommended);
+
+        $artists = $repository->findByFirstLetter($letter);
+        // print_r($artists);
+
+        // $manager = $this->getDoctrine()->getManager();
+
+        // foreach ($artists as $artistdata) {
+        //     $artist = new Artist();
+        //     $artist->setName($artistdata->name);
+        //     $artist->setSlug($artistdata->slug);
+
+        //     $manager->persist($artist);
+        // }
+
+        // $manager->flush();
 
         // print_r($output);
         // die;

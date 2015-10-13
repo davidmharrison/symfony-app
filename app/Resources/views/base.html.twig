@@ -47,10 +47,10 @@
                         </li>
                     {% endif %}
                   </ul>
-                 <!--  <form class="form-inline navbar-form pull-right">
-                    <input class="form-control" type="text" placeholder="Search">
-                    <button class="btn btn-success-outline" type="submit">Search</button>
-                  </form> -->
+                 <form class="form-inline navbar-form pull-right">
+                    <input class="form-control" id="search" type="text" placeholder="Search">
+                    {# <button class="btn btn-success-outline" type="submit">Search</button> #}
+                  </form>
                 </div>
             </nav>
             <br>
@@ -61,6 +61,12 @@
                 <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
             </ul> -->
         </div>
+        <div class="container">
+            <ul class="list-group" id="search-results">
+              
+            </ul>
+        </div>
+        <br>
         <div class="container" id="pjax-container">
             {% block body %}{% endblock %}
         </div>
@@ -71,6 +77,24 @@
         <script>
             document.addEventListener("DOMContentLoaded", function() { 
                 $(document).pjax('a','#pjax-container');
+
+                var client = algoliasearch('1XJ83A5RFF', '737fba846272a77ae515881cdcd04c5b');
+                var index = client.initIndex('Artist_dev');
+
+                var search = document.getElementById("search");
+                // var searchresults = document.getElementById("search-results");
+                search.addEventListener('keyup',function(){
+                  index.search(search.value).then(function searchSuccess(content) {
+                      $("#search-results").empty();
+                      for (var i = content.hits.length - 1; i >= 0; i--) {
+                        var artist = content.hits[i];
+                        var item = '<a href="/artists/'+artist.slug+'" class="list-group-item">'+artist.name+'</a>';
+                        $("#search-results").append(item);
+                      };
+                  }).catch(function searchFailure(err) {
+                        console.error(err);
+                  });
+                });
             });
         </script>
     </body>
@@ -79,7 +103,8 @@
 
 {% javascripts 
     '@jquery_and_ui' 
-    '@bootstrap_js' %}
+    '@bootstrap_js'
+    '//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js' %}
     <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 

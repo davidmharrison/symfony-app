@@ -91,3 +91,11 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+#Beanstalked pheanstalk
+leezy_pheanstalk:
+    pheanstalks:
+        primary:
+            server: localhost
+            port: 11300
+            default: true

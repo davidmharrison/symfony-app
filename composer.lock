@@ -4,9 +4,106 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d056e1e837994f476023138f41c42138",
-    "content-hash": "ac75793f183d8d8cc5353edbaf131342",
+    "hash": "e11639506c10675f71b8326a25f083d5",
+    "content-hash": "88d65c0ebfbeb0aeecc2823cbfff48a5",
     "packages": [
+        {
+            "name": "algolia/algolia-search-bundle",
+            "version": "1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/algolia/AlgoliaSearchBundle.git",
+                "reference": "f7038a596ec5393e89f06813a017c94e139acb31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/algolia/AlgoliaSearchBundle/zipball/f7038a596ec5393e89f06813a017c94e139acb31",
+                "reference": "f7038a596ec5393e89f06813a017c94e139acb31",
+                "shasum": ""
+            },
+            "require": {
+                "algolia/algoliasearch-client-php": "~1.5",
+                "doctrine/doctrine-bundle": "~1.2",
+                "doctrine/orm": "~2.2,>=2.2.3",
+                "symfony/finder": "~2.5",
+                "symfony/framework-bundle": "~2.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Algolia\\AlgoliaSearchBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François-Marie de Jouvencel",
+                    "email": "fm.de.jouvencel@gmail.com"
+                },
+                {
+                    "name": "Algolia Team",
+                    "email": "support@algolia.com"
+                }
+            ],
+            "description": "Seamless integration of Algolia Search into your Symfony project.",
+            "time": "2015-08-13 22:54:18"
+        },
+        {
+            "name": "algolia/algoliasearch-client-php",
+            "version": "1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/algolia/algoliasearch-client-php.git",
+                "reference": "56388cacd27d96f9430794f7b2250ec3151abd5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/56388cacd27d96f9430794f7b2250ec3151abd5c",
+                "reference": "56388cacd27d96f9430794f7b2250ec3151abd5c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.0.*",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "AlgoliaSearch": "src/",
+                    "AlgoliaSearch\\Tests": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Algolia Team",
+                    "email": "contact@algolia.com"
+                },
+                {
+                    "name": "Ryan T. Catlin",
+                    "email": "ryan.catlin@gmail.com"
+                },
+                {
+                    "name": "Jonathan H. Wage",
+                    "email": "jonwage@gmail.com"
+                }
+            ],
+            "description": "Algolia Search API Client for PHP",
+            "homepage": "https://github.com/algolia/algoliasearch-client-php",
+            "time": "2015-09-07 15:50:04"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",
@@ -1240,6 +1337,66 @@
             "time": "2015-08-31 19:07:16"
         },
         {
+            "name": "leezy/pheanstalk-bundle",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/armetiz/LeezyPheanstalkBundle.git",
+                "reference": "5455ca5fa5ffe81dae655c1b3ae5ddb9846e4a12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/armetiz/LeezyPheanstalkBundle/zipball/5455ca5fa5ffe81dae655c1b3ae5ddb9846e4a12",
+                "reference": "5455ca5fa5ffe81dae655c1b3ae5ddb9846e4a12",
+                "shasum": ""
+            },
+            "require": {
+                "pda/pheanstalk": "~3.0",
+                "php": ">=5.5.9",
+                "psr/log": "~1.0",
+                "symfony/console": "~2.3",
+                "symfony/framework-bundle": "~2.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit-mock-objects": "2.3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Leezy\\PheanstalkBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Tourlourat",
+                    "email": "thomas@tourlourat.com",
+                    "homepage": "http://www.armetiz.info"
+                }
+            ],
+            "description": "The LeezyPheanstalkBundle is a Symfony2 Bundle that provides a command line interface for manage the Beanstalkd workqueue server & a pheanstalk integration.",
+            "homepage": "https://github.com/armetiz/LeezyPheanstalkBundle",
+            "keywords": [
+                "asynchronous",
+                "beanstalkd",
+                "bundle",
+                "messaging",
+                "pheanstalk",
+                "queueing",
+                "symfony"
+            ],
+            "time": "2015-05-11 13:06:38"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.17.1",
             "source": {
@@ -1314,6 +1471,56 @@
                 "psr-3"
             ],
             "time": "2015-08-31 09:17:37"
+        },
+        {
+            "name": "pda/pheanstalk",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pda/pheanstalk.git",
+                "reference": "430e77c551479aad0c6ada0450ee844cf656a18b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pda/pheanstalk/zipball/430e77c551479aad0c6ada0450ee844cf656a18b",
+                "reference": "430e77c551479aad0c6ada0450ee844cf656a18b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pheanstalk\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Annesley",
+                    "email": "paul@annesley.cc",
+                    "homepage": "http://paul.annesley.cc/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP client for beanstalkd queue",
+            "homepage": "https://github.com/pda/pheanstalk",
+            "keywords": [
+                "beanstalkd"
+            ],
+            "time": "2015-08-07 21:42:41"
         },
         {
             "name": "psr/log",
@@ -1637,34 +1844,34 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v2.7.1",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "9320b6863404c70ebe111e9040dab96f251de7ac"
+                "reference": "7117b9a145722e3c5768db4585f6ad0643ed5c4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/9320b6863404c70ebe111e9040dab96f251de7ac",
-                "reference": "9320b6863404c70ebe111e9040dab96f251de7ac",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/7117b9a145722e3c5768db4585f6ad0643ed5c4a",
+                "reference": "7117b9a145722e3c5768db4585f6ad0643ed5c4a",
                 "shasum": ""
             },
             "require": {
                 "monolog/monolog": "~1.8",
                 "php": ">=5.3.2",
-                "symfony/config": "~2.3",
-                "symfony/dependency-injection": "~2.3",
-                "symfony/http-kernel": "~2.3",
-                "symfony/monolog-bridge": "~2.3"
+                "symfony/config": "~2.3|3.*",
+                "symfony/dependency-injection": "~2.3|3.*",
+                "symfony/http-kernel": "~2.3|3.*",
+                "symfony/monolog-bridge": "~2.3|3.*"
             },
             "require-dev": {
-                "symfony/console": "~2.3",
+                "symfony/console": "~2.3|3.*",
                 "symfony/yaml": "~2.3"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7.x-dev"
+                    "dev-master": "2.8.x-dev"
                 }
             },
             "autoload": {
@@ -1692,7 +1899,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2015-01-04 20:21:17"
+            "time": "2015-10-02 11:51:59"
         },
         {
             "name": "symfony/swiftmailer-bundle",
