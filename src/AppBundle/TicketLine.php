@@ -5,9 +5,11 @@ namespace AppBundle;
 class TicketLine {
 
 	private $apikey;
+	private $session;
 
-	function __construct($apikey) {
+	function __construct($session,$apikey) {
 		$this->apikey = $apikey;
+		$this->session = $session;
 	}
 
 	private function submitCurl($ch)
@@ -104,8 +106,11 @@ class TicketLine {
 
  		$ch = curl_init(); 
 
-		$user = file_get_contents(__DIR__."/user.json");
-		$user = json_decode($user);
+		// $user = file_get_contents(__DIR__."/user.json");
+		// $user = json_decode($user);
+		// print_r($this->session);
+		// die;
+		$user = $this->session->get('user');
 
         $encoded = "";
         $time = time();
@@ -145,8 +150,9 @@ class TicketLine {
         $apitoken = $time."YWFmOGMzNWJlNjk";
         $apitoken = sha1($apitoken);
 
-        $user = file_get_contents(__DIR__."/user.json");
-		$user = json_decode($user);
+        // $user = file_get_contents(__DIR__."/user.json");
+		// $user = json_decode($user);
+		$user = $this->session->get('user');
 
         $user_token = sha1("123456" . $user->email_address . "YWFmOGMzNWJlNjk");
 

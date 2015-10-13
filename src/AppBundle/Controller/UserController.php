@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 use AppBundle\TicketLine;
 
@@ -17,10 +18,10 @@ class UserController extends Controller
 
     public function showAction()
     {
-        $user = file_get_contents(__DIR__."/../user.json");
+        $user = $this->get('session')->get('user');
 
         return $this->render('AppBundle:User:user.html.twig',array(
-            "user" => json_decode($user)
+            "user" => $user
         ));
     }
 
@@ -37,19 +38,23 @@ class UserController extends Controller
         // print_r($output);
         // die;
 
-        file_put_contents(__DIR__."/../user.json",json_encode($output));
+        // set and get session attributes
+        $this->get('session')->set('user', $output);
+        // $user = $session->get('user');
+        // file_put_contents(__DIR__."/../user.json",json_encode($output));
 
-        $user = file_get_contents(__DIR__."/../user.json");
-        $user = json_decode($user);
+        // $user = file_get_contents(__DIR__."/../user.json");
+        // $user = json_decode($user);
 
         return $this->render('AppBundle:User:user.html.twig', array(
-            "user" => $user        
+            "user" => $output        
         ));    
     }
 
     public function logoutAction()
     {
-        file_put_contents(__DIR__."/../user.json","");
+
+        $this->get('session')->remove('user');
 
         return $this->forward("AppBundle:Default:index");
 

@@ -12,10 +12,11 @@ services:
             - { name: twig.extension }
     user:
         class: AppBundle\User
+        arguments: ["@session"]
 
     ticketline:
         class: AppBundle\TicketLine
-        arguments: ["%ticketline%"]
+        arguments: ["@session","%ticketline%"]
 
     app.pjax.action_listener:
         class: AppBundle\EventListener\PjaxListener
