@@ -6,12 +6,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
+use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
+
 use AppBundle\Entity\Artist;
 
 class AToZController extends Controller
 {
     public function indexAction(Request $request)
     {
+
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter()));
+
+        $serializer = new Serializer($normalizers, $encoders);
+
     	$letetrparam = $request->query->get('letter');
     	$letter = !empty($letetrparam) ? $letetrparam : "A";
 
@@ -28,27 +40,27 @@ class AToZController extends Controller
         // while($job = $pheanstalk->reserve()) {
         //     $letter = $job->getData();
 
-        //     $ticketline = $this->get('ticketline');
+            // $ticketline = $this->get('ticketline');
 
-        //     $artists = $ticketline->getArtistsByLetter($letter);
+            // $artists = $ticketline->getArtistsByLetter($letter);
 
-        //     // print_r($letter);
-        //     // die;
+            // // print_r($letter);
+            // // die;
 
-        //     foreach($artists as $artistdata) {
+            // foreach($artists as $artistdata) {
 
-        //         $artist = $repository->findOneBySlug($artistdata->slug);
-        //         if(!$artist) {
+            //     $artist = $repository->findOneBySlug($artistdata->slug);
+            //     if(!$artist) {
 
-        //             $artist = new Artist();
-        //             $artist->setName($artistdata->name);
-        //             $artist->setSlug($artistdata->slug);
+            //         $artist = new Artist();
+            //         $artist->setName($artistdata->name);
+            //         $artist->setSlug($artistdata->slug);
 
-        //             $manager->persist($artist);
-        //         }
-        //     }
+            //         $manager->persist($artist);
+            //     }
+            // }
 
-        //     $manager->flush();
+            // $manager->flush();
         //     $pheanstalk->delete($job);
         // }
 
@@ -58,6 +70,15 @@ class AToZController extends Controller
      //    $artists = json_decode($recommended);
 
         $artists = $repository->findByFirstLetter($letter);
+
+        // $artists = $repository->findArtistsByGenre($tag);
+
+        $artists = $serializer->normalize($artists);
+
+        $artists = $serializer->serialize($artists,'json');
+
+        $artists = json_decode($artists);
+        
         // print_r($artists);
 
         // $manager = $this->getDoctrine()->getManager();

@@ -317,3 +317,4 @@ class Artist
         return $this->tags;
     }
 }
+

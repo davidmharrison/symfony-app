@@ -13,10 +13,30 @@ class ArtistRepository extends \Doctrine\ORM\EntityRepository
 
 	public function findByFirstLetter($letter)
 	{
-		// $qb = $this->createQueryBuilder('u');
+		// $qb = $this->createQueryBuilder('a');
+		if($letter == 'non-alpha') {
+			return $this->getEntityManager()//$qb->andWhere('REGEXP(a.name, :regexp) != true')
+					->createQuery('SELECT a FROM AppBundle:Artist a WHERE REGEXP(a.name, :regexp) != true')
+					->setParameter('regexp', '^[[:alpha:]]')
+					// ->getQuery()
+					->getResult();
+		} else {
 
-		return $this->getEntityManager()
+			return $this->getEntityManager()
 					->createQuery('SELECT a FROM AppBundle:Artist a WHERE a.name LIKE :letter')
 					->setParameter('letter',$letter.'%')->getResult();
+		}
+	}
+
+	public function findArtistsByGenre($tag)
+	{
+		$query = $this->getEntityManager()
+	        ->createQuery('SELECT a, t FROM AppBundle:Artist a LEFT JOIN a.tags t WHERE t.slug = :name'
+	    	)->setParameter('name', $tag);
+	    try {
+	        return $query->getResult();
+	    } catch (\Doctrine\ORM\NoResultException $e) {
+	        return null;
+	    }
 	}
 }

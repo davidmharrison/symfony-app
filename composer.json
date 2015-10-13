@@ -22,7 +22,9 @@
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "fzaninotto/faker": "^1.5",
         "algolia/algolia-search-bundle": "^1.0",
-        "leezy/pheanstalk-bundle": "^3.0"
+        "leezy/pheanstalk-bundle": "^3.0",
+        "symfony/serializer": "^2.7",
+        "beberlei/DoctrineExtensions": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

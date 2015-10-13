@@ -26,6 +26,20 @@ class TicketLine {
 		return $output;
 	}
 
+	public function getTags()
+	{
+		$url = "http://api.ticketline.co.uk//tag?method=getAll&genre=:genre&api-key=".$this->apikey."";
+
+        $ch = curl_init(); 
+
+        // set url 
+        curl_setopt($ch, CURLOPT_URL, $url); 
+
+        $output = $this->submitCurl($ch);
+
+        return json_decode($output);
+	}
+
 	public function getArtistsByLetter($letter)
 	{
 		$url = "http://api.ticketline.co.uk//artist?method=getByAtoZ&first-char=".$letter."&api-key=".$this->apikey."&on-sale=true";

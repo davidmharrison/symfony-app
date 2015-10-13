@@ -8,7 +8,7 @@
 		<div class="col-md-5">
 			<div class="card card-inverse">
 				<a href="/artists/{{event.slug}}">
-				  <img class="card-img" style="max-width:100%;" src="{{event.image_base_url}}{{event.Images[0].filename}}" alt="Card image"> <!-- Images[0].filename -->
+				  <img class="card-img" style="width:100%;" src="{{event.image_base_url}}{{event.Images[0].filename}}" alt="Card image"> <!-- Images[0].filename -->
 				  <div class="card-img-overlay">
 				    <h4 class="card-title">{{event.name}}</h4>
 				    {% if event.caption %}

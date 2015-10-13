@@ -8,14 +8,25 @@
 		<div class="col-md-10">
 			<div class="row">
 				{% for artist in artists %}
-					<div class="col-md-12">
-						<div class="card card-block">
-
+					<div class="col-md-4">
+						<div class="card">
+							{% if artist.image_base_url %}
+								<a href="/artists/{{artist.slug}}">
+								  <img class="card-img-top"  style="width:100%;" src="{{artist.image_base_url}}{{artist.image_default}}" alt="Card image cap">
+							  </a>
+							{% endif %}
+						  <div class="card-block">
+						    <h4 class="card-title">{{artist.name}}</h4>
+						    <p class="card-text">On Sale.</p>
+						    <a href="/artists/{{artist.slug}}" class="btn btn-success">Buy</a>
+						  </div>
+						</div>
+						{# <div class="card card-block">
+							
 						  <h4 class="card-title">{{artist.name}}</h4>
 						  <p class="card-text">On Sale</p>
 						  <a href="/artists/{{artist.slug}}" class="card-link">View</a>
-						  <!-- <a href="#" class="card-link">Another link</a> -->
-						</div>
+						</div> #}
 					</div>
 				{% endfor %}
 			</div>
@@ -25,6 +36,7 @@
 				<a href="?letter={{letter}}">{{letter}}</a>
 			{% endfor %}
 			<a href="?letter=Z">Z</a>
+			<a href="?letter=non-alpha">#0-9!</a>
 		</div>
 	</div>
 {% endblock %}

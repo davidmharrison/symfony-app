@@ -9,7 +9,9 @@
 		<div class="col-md-3">
 			<div class="card card-inverse">
 				<a href="/artists/{{artist.slug}}">
-				  <img class="card-img" style="max-width:100%;" src="{{artist.image_base_url}}{{artist.image_default}}" alt="Card image"> <!-- Images[0].filename -->
+					{% if artist.image_base_url %}
+					  <img class="card-img" style="width:100%;" src="{{artist.image_base_url}}{{artist.image_default}}" alt="Card image"> <!-- Images[0].filename -->
+					{% endif %}
 				  <div class="card-img-overlay">
 				    <h4 class="card-title">{{artist.name}}</h4>
 				    {% if artist.caption %}

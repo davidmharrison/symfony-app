@@ -3,35 +3,25 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\Common\Persistence\ObjectManager;
+
+use AppBundle\Entity\Tag;
+use AppBundle\TicketLine;
 
 class GenreController extends Controller
 {
     public function indexAction()
     {
 
-        $artistbytagurl = "http://api.ticketline.co.uk//tag?method=getAll&genre=:genre&api-key=NGNkZGRhYjkzY2Z";
+        // $ticketline = $this->get('ticketline');
 
-        $ch = curl_init(); 
+        // $genres = $ticketline->getTags();
 
-        // set url 
-        curl_setopt($ch, CURLOPT_URL, $artistbytagurl); 
+        $manager = $this->getDoctrine()->getManager();
 
-        //return the transfer as a string 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Tag');
 
-        // $output contains the output string 
-        $output = curl_exec($ch); 
-
-        // close curl resource to free up system resources 
-        curl_close($ch);
-
-        $recommended = $output;
-
-        $genres = json_decode($recommended);
-
-        $genres = array_filter($genres,function($genre){
-        	return $genre->is_ticketline_genre == true;
-        });
+        $genres = $repository->createQueryBuilder('t')->where('t.is_ticketline_genre = true')->getQuery()->getResult();
 
         return $this->render('AppBundle:Genre:index.html.twig', array(
         	"genres" => $genres
