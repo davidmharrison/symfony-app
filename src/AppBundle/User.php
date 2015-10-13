@@ -19,13 +19,13 @@ class User extends Controller {
 		// print_r($session);
 		// die;
 
-		$user = $session->get('user');
+		// $user = $session->get('user');
 
-		if(!empty($user)) {
-			$this->first_name = $user->first_name;
-			$this->last_name = $user->last_name;
-		}
+		// if(!empty($user)) {
+		// 	$this->first_name = $user->first_name;
+		// 	$this->last_name = $user->last_name;
+		// }
 		
-		$this->user = $user;
+		// $this->user = $user;
 	}
 }

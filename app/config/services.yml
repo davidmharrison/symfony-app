@@ -10,9 +10,9 @@ services:
         public: false
         tags:
             - { name: twig.extension }
-    user:
-        class: AppBundle\User
-        arguments: ["@session"]
+    # user:
+        # class: AppBundle\User
+        # arguments: ["@session"]
 
     ticketline:
         class: AppBundle\TicketLine
